@@ -35,7 +35,7 @@ public class Venda implements Serializable {
 	@OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST)
 	private List<ItensVendidos> itensVendidos = new ArrayList<>();
 
-	private Double valorTotal;
+	private Double valorTotal = 0.0;
 
 	public Venda(Long id, Date dataVenda, Usuario vendedor, Double valorTotal) {
 		this.id = id;
@@ -86,6 +86,12 @@ public class Venda implements Serializable {
 		}
 		return valorTotal;
 	}
+	
+	
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	@Override
 	public int hashCode() {
@@ -103,5 +109,7 @@ public class Venda implements Serializable {
 		Venda other = (Venda) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 
 }
