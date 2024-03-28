@@ -1,5 +1,7 @@
 package com.estacioGeladao.geladaoExpress.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +77,33 @@ public class VendaService {
 		} catch (Exception e) {
 			throw new VendaException("Não foi possível salvar a venda");
 		}
+	}
+
+	public List<Venda> listarTodas() {
+		List<Venda> listaDeVendas = vendaRepository.findAll();
+
+		if (listaDeVendas.isEmpty() || listaDeVendas == null) {
+			throw new VendaException(VendaException.NENHUMA_VENDA_ENCONTRADA);
+		}
+
+		return listaDeVendas;
+	}
+
+	public Venda buscarVendaPorId(Long id) {
+		Venda venda = vendaRepository.findById(id).orElse(null);
+		if (venda == null) {
+			throw new VendaException(VendaException.VENDA_NAO_ENCONTRADA);
+		}
+
+		return venda;
+	}
+
+	public void deletarVenda(Long id) {
+		Venda venda = vendaRepository.findById(id).orElse(null);
+		if (venda == null) {
+			throw new VendaException(VendaException.VENDA_NAO_ENCONTRADA);
+		}
+		 vendaRepository.deleteById(id);
 	}
 
 }
