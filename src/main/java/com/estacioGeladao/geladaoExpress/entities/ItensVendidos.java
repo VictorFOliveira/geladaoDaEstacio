@@ -3,6 +3,8 @@ package com.estacioGeladao.geladaoExpress.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class ItensVendidos implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "venda_id")
+    @JsonBackReference
 	private Venda venda;
 
 	public ItensVendidos() {

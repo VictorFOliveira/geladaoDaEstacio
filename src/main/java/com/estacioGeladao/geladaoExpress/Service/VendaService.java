@@ -40,15 +40,19 @@ public class VendaService {
 			venda.setVendedor(vendedor);
 
 			Double valorTotal = 0.0; // Inicializa o valor total como 0.0
-	        for (ItensVendidos item : venda.getItensVendidos()) {
-	            Produto produto = produtoRepository.findById(item.getProduto().getId())
-	                    .orElseThrow(() -> new VendaException("Produto não encontrado"));
-	            item.setProduto(produto);
-	            
-	            // Calcula o valor total do item e adiciona ao valor total da venda
-	            valorTotal += produto.getPrecoUnitario() * item.getQuantidade();
-	            venda.setValorTotal(valorTotal);
-	        }
+			for (ItensVendidos item : venda.getItensVendidos()) {
+				Produto produto = produtoRepository.findById(item.getProduto().getId())
+						.orElseThrow(() -> new VendaException("Produto não encontrado"));
+				item.setProduto(produto);
+
+				int novaQuantidade = produto.getQuantidade() - item.getQuantidade();
+				produto.setQuantidade(novaQuantidade);
+				produtoRepository.save(produto);
+
+				// Calcula o valor total do item e adiciona ao valor total da venda
+				valorTotal += produto.getPrecoUnitario() * item.getQuantidade();
+				venda.setValorTotal(valorTotal);
+			}
 
 			if (venda.getVendedor() == null || venda.getVendedor().getId() == null) {
 				throw new VendaException("ID do vendedor não foi fornecido");
@@ -58,6 +62,7 @@ public class VendaService {
 				Produto produto = produtoRepository.findById(item.getProduto().getId())
 						.orElseThrow(() -> new VendaException("Produto não encontrado"));
 				item.setProduto(produto);
+				item.setVenda(venda);
 			}
 
 			if (venda.getVendedor() == null || venda.getVendedor().getId() == null) {

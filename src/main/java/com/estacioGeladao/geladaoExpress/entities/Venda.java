@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +34,8 @@ public class Venda implements Serializable {
 	@JoinColumn(name = "vendedor_id")
 	private Usuario vendedor;
 
-	@OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    @JsonManagedReference
 	private List<ItensVendidos> itensVendidos = new ArrayList<>();
 
 	private Double valorTotal = 0.0;
