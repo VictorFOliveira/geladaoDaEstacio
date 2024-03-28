@@ -30,14 +30,15 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String email, String senha, String cpf, TipoDeAcesso acesso) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.senha = senha;
-		this.cpf = cpf;
-		this.acesso = acesso;
+	public Usuario(Long id, String email, String senha, String cpf, int acesso) {
+	    super();
+	    this.id = id;
+	    this.email = email;
+	    this.senha = senha;
+	    this.cpf = cpf;
+		this.acesso = TipoDeAcesso.getByValor(acesso);
 	}
+
 
 	public Long getId() {
 		return id;
@@ -46,7 +47,7 @@ public class Usuario implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -80,11 +81,11 @@ public class Usuario implements Serializable {
 	}
 
 	public TipoDeAcesso getAcesso() {
-		return acesso;
+	    return acesso;
 	}
 
 	public void setAcesso(TipoDeAcesso acesso) {
-		this.acesso = acesso;
+	    this.acesso = acesso;
 	}
 
 	@Override

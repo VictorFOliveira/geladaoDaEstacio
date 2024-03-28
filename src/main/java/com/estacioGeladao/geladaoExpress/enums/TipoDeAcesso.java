@@ -1,19 +1,28 @@
 package com.estacioGeladao.geladaoExpress.enums;
 
-public enum TipoDeAcesso {
+import java.io.Serializable;
+
+public enum TipoDeAcesso implements Serializable {
 	
-	Vendedor(1), 
-	Administrador(2);
-	
-	private int valor;
-	
-	TipoDeAcesso(int valor){
-		this.valor = valor;
-	}
-	
-	
-	public int getValor() {
-		return valor;
-	}
-	
+    Vendedor(0),
+    Administrador(1);
+
+    private int valor;
+
+    TipoDeAcesso(int valor) {
+        this.valor = valor;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public static TipoDeAcesso getByValor(int valor) {
+        for (TipoDeAcesso tipo : values()) {
+            if (tipo.getValor() == valor) {
+                return tipo;
+            }
+        }
+        throw new IllegalArgumentException("Tipo de acesso inválido: " + valor);
+    }
 }
