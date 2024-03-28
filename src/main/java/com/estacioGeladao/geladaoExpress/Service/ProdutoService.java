@@ -59,6 +59,14 @@ public class ProdutoService {
 	    
 	    return repository.save(produtoExist);
 	}
+	
+	 public void atualizarEstoque(Long id, Integer quantidade) {
+	        Produto produto = findById(id);
+	        if (produto != null) {
+	            produto.setQuantidade(quantidade);
+	            repository.save(produto);
+	        }
+	    }
 
 
 

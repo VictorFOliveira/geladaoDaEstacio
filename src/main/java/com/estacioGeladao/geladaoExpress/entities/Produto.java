@@ -8,11 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
 @Table(name = "tb_produto")
 public class Produto implements Serializable {
@@ -25,9 +22,25 @@ public class Produto implements Serializable {
 
 	private String nome;
 	private String marca;
-	private Integer quantidade;
+	private Integer quantidade = 0 ;
 	private Double precoUnitario;
 	private Date dataValidade;
+	
+	
+	
+
+	public Produto() {
+		super();
+	}
+
+	public Produto(Long id, String nome, String marca, Integer quantidade, Double precoUnitario, Date dataValidade) {
+		this.id = id;
+		this.nome = nome;
+		this.marca = marca;
+		this.quantidade = quantidade;
+		this.precoUnitario = precoUnitario;
+		this.dataValidade = dataValidade;
+	}
 
 	public Long getId() {
 		return id;
@@ -62,8 +75,9 @@ public class Produto implements Serializable {
 	}
 
 	public Double getPrecoUnitario() {
-		return precoUnitario;
+	    return precoUnitario != null ? precoUnitario : 0.0;
 	}
+
 
 	public void setPrecoUnitario(Double precoUnitario) {
 		this.precoUnitario = precoUnitario;

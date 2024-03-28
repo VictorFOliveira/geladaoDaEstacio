@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estacioGeladao.geladaoExpress.Service.ProdutoService;
 import com.estacioGeladao.geladaoExpress.entities.Produto;
 
 @RestController
-
+@RequestMapping("/produtos")
 public class ProdutoController {
 
 	@Autowired
@@ -48,6 +49,5 @@ public class ProdutoController {
 	    service.deleteProduto(id);
 	    return ResponseEntity.ok("Produto Deletado");
 	}
-
-
+	
 }
