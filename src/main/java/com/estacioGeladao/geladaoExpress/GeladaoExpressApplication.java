@@ -8,6 +8,7 @@ public class GeladaoExpressApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GeladaoExpressApplication.class, args);
+		
 	}
 
 }

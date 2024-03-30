@@ -15,9 +15,9 @@ public class UsuariosService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	public Usuario salvarUsuario(Usuario usuario) {
-		return repository.save(usuario);
-	}
+	 public Usuario salvarUsuario(Usuario usuario) {
+	        return repository.save(usuario);
+	    }
 
 	public Usuario atualizarUsuario(Long id, Usuario novoUsuario) {
 		Usuario usuario = repository.findById(id).orElse(null);
